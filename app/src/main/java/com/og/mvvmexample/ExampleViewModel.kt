@@ -4,9 +4,9 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 
-class ExampleViewModel()
-    : BaseObservable() { //add observable for dataBinding
-    private val exampleRepository= ExampleRepository()
+class ExampleViewModel : BaseObservable() { //add observable for dataBinding
+    private val exampleRepository = ExampleRepository()
+
     //know about repo
     var stringsLiveData: MutableLiveData<List<String>> = exampleRepository.stringsLiveData
 
