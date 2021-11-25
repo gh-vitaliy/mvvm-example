@@ -1,14 +1,20 @@
 package com.og.mvvmexample
 
-import androidx.databinding.BaseObservable
+import android.content.Context
+import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 //u can simply inject something in constructor
 //but if u want to inject something outside constructor u must call inject fun from component
 class ExampleViewModel @Inject constructor(private val exampleRepository: ExampleRepository) :
-    BaseObservable() { //add observable for dataBinding
+    ObservableViewModel() { //add observable for dataBinding
 
 
     //know about repo
@@ -17,6 +23,7 @@ class ExampleViewModel @Inject constructor(private val exampleRepository: Exampl
     init {
         //ask repository to ask model to fetch data
         exampleRepository.fetchData()
+
     }
 
 
@@ -31,5 +38,11 @@ class ExampleViewModel @Inject constructor(private val exampleRepository: Exampl
             field = value
         }
 
-
+    //example with lifecycleScope
+    fun onClick() {
+        viewModelScope.launch(Job()+Dispatchers.Main) { //user Main bcs toasts can show only on main ui thread
+            delay(2000)
+            Toast.makeText(this as Context, stringsText, Toast.LENGTH_SHORT).show()
+        }
+    }
 }
