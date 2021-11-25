@@ -3,9 +3,13 @@ package com.og.mvvmexample
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
+import javax.inject.Inject
 
-class ExampleViewModel : BaseObservable() { //add observable for dataBinding
-    private val exampleRepository = ExampleRepository()
+//u can simply inject something in constructor
+//but if u want to inject something outside constructor u must call inject fun from component
+class ExampleViewModel @Inject constructor(private val exampleRepository: ExampleRepository) :
+    BaseObservable() { //add observable for dataBinding
+
 
     //know about repo
     var stringsLiveData: MutableLiveData<List<String>> = exampleRepository.stringsLiveData
