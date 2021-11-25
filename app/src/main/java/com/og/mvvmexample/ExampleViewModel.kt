@@ -1,6 +1,5 @@
 package com.og.mvvmexample
 
-import android.content.Context
 import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
@@ -40,9 +39,9 @@ class ExampleViewModel @Inject constructor(private val exampleRepository: Exampl
 
     //example with lifecycleScope
     fun onClick() {
-        viewModelScope.launch(Job()+Dispatchers.Main) { //user Main bcs toasts can show only on main ui thread
+        viewModelScope.launch(Job() + Dispatchers.Main) { //user Main bcs toasts can show only on main ui thread
             delay(2000)
-            Toast.makeText(this as Context, stringsText, Toast.LENGTH_SHORT).show()
+            Toast.makeText(ExampleApp.getContext(), stringsText, Toast.LENGTH_SHORT).show()
         }
     }
 }
